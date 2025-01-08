@@ -13,6 +13,8 @@ Currently, two official plugins are available:
     npm run dev
 ```
 
+Then you can access the page by using the url shown in the terminal after run above command
+
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
