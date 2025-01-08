@@ -1,0 +1,6 @@
+.full-width-space {
+	width: 100%;
+	display: flex;
+	background: linear-gradient(to right, #10146c, #08144c);
+	padding: 5%;
+}
