@@ -15,6 +15,12 @@ Currently, two official plugins are available:
 
 Then you can access the page by using the url shown in the terminal after run above command
 
+### Images about the page
+
+![image](https://github.com/user-attachments/assets/fe6772bc-50ce-428d-a3e8-3058c50b226b)
+
+![image](https://github.com/user-attachments/assets/3b839c59-e9d1-40fb-9757-e7d1f8b8d093)
+
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
