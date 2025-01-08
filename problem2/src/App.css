@@ -46,7 +46,54 @@
 	color: rgb(51 51 51 / var(--tw-text-opacity));
 	font-weight: bold;
 }
+.average-section {
+	font-size: larger;
+	font-weight: bold;
+}
 .ant-card.card-shadow {
 	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 10px 30px rgba(0, 0, 0, 0.3);
 	border-radius: 10px;
+}
+.btn-convert {
+	margin-top: 2.5vh;
+	height: 10vh;
+	font-size: 1.2em;
+}
+.name-currency {
+	font-weight: 500;
+}
+.result-box {
+	width: 20vw;
+	padding: 1vw;
+	border-radius: 1vw;
+}
+.result-text {
+	font-size: 2vh;
+	font-family: Sans-serif;
+	color: rgb(51 51 51 / var(--tw-text-opacity));
+	font-weight: bold;
+}
+.swap-button {
+	position: absolute;
+	top: 56%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: #10146c;
+	color: white;
+	border-radius: 50%;
+	width: 7vh;
+	height: 7vh;
+	font-size: 1.2rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	cursor: pointer;
+	z-index: 10;
+}
+.swap-button:hover {
+	background-color: #08144c;
+}
+.table-quick-exchange {
+	width: 30vw;
 }
