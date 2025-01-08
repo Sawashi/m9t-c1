@@ -17,9 +17,10 @@ Then you can access the page by using the url shown in the terminal after run ab
 
 ### Images about the page
 
-![image](https://github.com/user-attachments/assets/fe6772bc-50ce-428d-a3e8-3058c50b226b)
+![image](https://github.com/user-attachments/assets/3bf99aa7-a489-4125-a675-312f332c9c02)
 
-![image](https://github.com/user-attachments/assets/3b839c59-e9d1-40fb-9757-e7d1f8b8d093)
+![image](https://github.com/user-attachments/assets/3daef3fd-ba67-44d6-b0e1-36f0c9ee197e)
+
 
 ## Expanding the ESLint configuration
 
