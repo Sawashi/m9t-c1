@@ -32,6 +32,7 @@ function App() {
 	const [messageApi, contextHolder] = message.useMessage();
 	const [data, setData] = useState<CurrencyData[]>([]);
 	const [loading, setLoading] = useState<boolean>(true);
+	const [calculationLoading, setCalculationLoading] = useState<boolean>(false);
 	const [error, setError] = useState<string>("");
 	const [fromCurrency, setFromCurrency] = useState<string | undefined>(
 		undefined
@@ -43,6 +44,7 @@ function App() {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
+				setLoading(true);
 				const response = await fetch(
 					"https://interview.switcheo.com/prices.json"
 				);
@@ -64,6 +66,8 @@ function App() {
 				);
 
 				setData(latestData);
+				//mimic the delay
+				await new Promise((resolve) => setTimeout(resolve, 2000));
 			} catch (err) {
 				if (err instanceof Error) {
 					setError(err.message);
@@ -119,13 +123,13 @@ function App() {
 		},
 	];
 
-	if (loading) return <Spin size="large" />;
 	if (error) return <Alert message="Error" description={error} type="error" />;
 	const convertCurrency = (
 		fromCurrency: string,
 		toCurrency: string,
 		ammount: number
 	) => {
+		setCalculationLoading(true);
 		if (ammount <= 0 || isNaN(ammount)) {
 			messageApi.error("Please enter a valid amount");
 			return;
@@ -137,10 +141,14 @@ function App() {
 
 		const fromRate = data.find((item) => item.currency === fromCurrency)?.price;
 		const toRate = data.find((item) => item.currency === toCurrency)?.price;
+		console.log(fromRate, toRate);
 		if (!fromRate || !toRate) return 0;
 
-		const convertedAmmount = (ammount / fromRate) * toRate;
-		setResult(Number(convertedAmmount.toFixed(5)));
+		setTimeout(() => {
+			const convertedAmmount = (ammount * fromRate) / toRate;
+			setResult(Number(convertedAmmount.toFixed(5)));
+			setCalculationLoading(false);
+		}, 2000);
 	};
 
 	const currencies = [...new Set(data.map((item) => item.currency))];
@@ -149,7 +157,7 @@ function App() {
 		const fromRate = data.find((item) => item.currency === fromCurrency)?.price;
 		const toRate = data.find((item) => item.currency === toCurrency)?.price;
 		const convertedAmount =
-			fromRate && toRate ? (amount / fromRate) * toRate : 0;
+			fromRate && toRate ? (amount * fromRate) / toRate : 0;
 		return {
 			key: amount.toString(),
 			amount,
@@ -248,28 +256,40 @@ function App() {
 						</Button>
 					</Flex>
 				</Row>
-				{result > 0 && (
-					<Space direction="vertical" align="start" className="result-box-full">
-						<div className="average-section">Result</div>
-						<Space direction="horizontal" align="center" className="result-box">
-							<span className="result-text">{fromAmmount}</span>
-							{fromCurrency}
-							<Icon name={fromCurrency || ""} />=
-							<span className="result-text">{result}</span>
-							{toCurrency}
-							<Icon name={toCurrency || ""} />
-						</Space>
+				{calculationLoading ? (
+					<Spin className="loading" />
+				) : (
+					result > 0 && (
+						<Space
+							direction="vertical"
+							align="start"
+							className="result-box-full"
+						>
+							<div className="average-section">Result</div>
+							<Space
+								direction="horizontal"
+								align="center"
+								className="result-box"
+							>
+								<span className="result-text">{fromAmmount}</span>
+								{fromCurrency}
+								<Icon name={fromCurrency || ""} />=
+								<span className="result-text">{result}</span>
+								{toCurrency}
+								<Icon name={toCurrency || ""} />
+							</Space>
 
-						<Table
-							columns={quickColumns}
-							dataSource={quickConversionData}
-							rowKey="key"
-							pagination={false}
-							size="small"
-							className="table-quick-exchange"
-							bordered
-						/>
-					</Space>
+							<Table
+								columns={quickColumns}
+								dataSource={quickConversionData}
+								rowKey="key"
+								pagination={false}
+								size="small"
+								className="table-quick-exchange"
+								bordered
+							/>
+						</Space>
+					)
 				)}
 
 				<div className="section-header">Latest rate</div>
@@ -281,6 +301,7 @@ function App() {
 					pagination={{
 						position: ["bottomCenter"],
 					}}
+					loading={loading}
 				/>
 			</Card>
 		</Space>
