@@ -15,7 +15,7 @@
 	border-top-right-radius: 70% 15%;
 }
 .header-big {
-	font-size: 10vh;
+	font-size: 5vw;
 	font-family: Sans-serif;
 	color: white;
 	font-weight: bold;
@@ -96,4 +96,7 @@
 }
 .table-quick-exchange {
 	width: 30vw;
+}
+img {
+	margin-top: 0.7vh;
 }
