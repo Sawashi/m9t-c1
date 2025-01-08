@@ -30,7 +30,10 @@ var sum_to_n_c = function (n) {
 	return sum;
 };
 function runAll(n) {
+	console.log("By math:");
 	console.log(sum_to_n_a(n));
+	console.log("By recursion:");
 	console.log(sum_to_n_b(n));
+	console.log("By loop:");
 	console.log(sum_to_n_c(n));
 }
