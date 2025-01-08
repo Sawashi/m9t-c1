@@ -37,9 +37,7 @@ function App() {
 		undefined
 	);
 	const [fromAmmount, setFromAmmount] = useState<number>(0);
-	const [toAmmount, setToAmmount] = useState<number>(0);
 	const [result, setResult] = useState<number>(0);
-
 	const [toCurrency, setToCurrency] = useState<string | undefined>(undefined);
 
 	useEffect(() => {
@@ -53,7 +51,6 @@ function App() {
 				}
 				const result: CurrencyData[] = await response.json();
 
-				// Group by currency and get the latest data for each currency
 				const latestData = Object.values(
 					result.reduce((acc: { [key: string]: CurrencyData }, item) => {
 						if (
@@ -90,10 +87,10 @@ function App() {
 			dataIndex: "currency",
 			key: "currency",
 			render: (currency: string) => (
-				<>
+				<Space direction="horizontal" align="center" className="center-align">
 					<Icon name={currency} />
 					{currency}
-				</>
+				</Space>
 			),
 		},
 		{
@@ -137,16 +134,15 @@ function App() {
 			messageApi.error("Please select currency");
 			return;
 		}
-		// Get the rate of the currency
+
 		const fromRate = data.find((item) => item.currency === fromCurrency)?.price;
 		const toRate = data.find((item) => item.currency === toCurrency)?.price;
 		if (!fromRate || !toRate) return 0;
-		// Convert the currency, only take 5 decimal places
+
 		const convertedAmmount = (ammount / fromRate) * toRate;
 		setResult(Number(convertedAmmount.toFixed(5)));
 	};
 
-	// Get unique currencies
 	const currencies = [...new Set(data.map((item) => item.currency))];
 
 	const quickConversionData = [1, 3, 5, 15, 30].map((amount) => {
@@ -207,7 +203,6 @@ function App() {
 							<Button
 								className="swap-button"
 								onClick={() => {
-									// Swap logic
 									const tempCurrency = fromCurrency;
 									setFromCurrency(toCurrency);
 									setToCurrency(tempCurrency);
@@ -264,7 +259,6 @@ function App() {
 							{toCurrency}
 							<Icon name={toCurrency || ""} />
 						</Space>
-						{/* add a quick exchange table at here */}
 
 						<Table
 							columns={quickColumns}
@@ -278,7 +272,7 @@ function App() {
 					</Space>
 				)}
 
-				<div className="section-header">Rate</div>
+				<div className="section-header">Latest rate</div>
 				<Table
 					bordered
 					dataSource={data}
