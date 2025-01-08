@@ -13,4 +13,4 @@ The assignment not say n is positive only so i have to develop algorithm that ca
 
 ![image](https://github.com/user-attachments/assets/b014c7e5-7abf-4670-9f73-b86404e6ef22)
 
-![Uploading image.png…]()
+![image](https://github.com/user-attachments/assets/452d7257-87a8-4002-b7e8-f560eb13128a)
